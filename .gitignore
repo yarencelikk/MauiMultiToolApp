@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # Gizli yapılandırma (Firebase adresi vb.)
 Secrets.cs
+ApiKeys.cs
