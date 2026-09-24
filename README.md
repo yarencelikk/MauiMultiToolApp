@@ -43,7 +43,7 @@ GorselProgramlama _Yeni/
 
 | Kurlar | Haberler | Yapılacaklar |
 |---|---|---|
-| ![Kurlar](screenshots/kurlar.png) | ![Haberler](screenshots/haberler.png) | ![Yapılacaklar](screenshots/todo.png) |
+| ![Kurlar](kurlar.png) | ![Haberler](haberler.png) | ![Yapılacaklar](todo.png) |
 
 ## 🚀 Kurulum ve Çalıştırma
 
