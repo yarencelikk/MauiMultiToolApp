@@ -22,9 +22,16 @@ public partial class ToDoPage : ContentPage
 
     private async Task LoadData()
     {
-        var items = await _firebaseService.GetToDoItemsAsync();
-        _items = new ObservableCollection<ToDoItem>(items);
-        toDoCollection.ItemsSource = _items;
+        try
+        {
+            var items = await _firebaseService.GetToDoItemsAsync();
+            _items = new ObservableCollection<ToDoItem>(items ?? new List<ToDoItem>());
+            toDoCollection.ItemsSource = _items;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Hata", "Görevler yüklenemedi: " + ex.Message, "Tamam");
+        }
     }
 
     private async void OnDeleteClicked(object sender, EventArgs e)
@@ -35,28 +42,47 @@ public partial class ToDoPage : ContentPage
         if (item == null)
             return;
 
-        var confirm = await DisplayAlert("Sil", "G�revi silmek istiyor musunuz?", "Evet", "Hay�r");
-        if (confirm)
+        var confirm = await DisplayAlert("Sil", "Görevi silmek istiyor musunuz?", "Evet", "Hayır");
+        if (!confirm)
+            return;
+
+        try
         {
             await _firebaseService.DeleteToDoAsync(item.Id);
             _items.Remove(item);
         }
-    }
-    private async void OnCheckboxChanged(object sender, CheckedChangedEventArgs e)
-    {
-        var checkbox = (CheckBox)sender;
-        var item = (ToDoItem)checkbox.BindingContext;
-
-        if (item != null)
+        catch (Exception ex)
         {
-            item.IsDone = e.Value;
-            await _firebaseService.UpdateToDoAsync(item); // Firebase'e g�ncelle
+            await DisplayAlert("Hata", "Görev silinemedi: " + ex.Message, "Tamam");
         }
     }
 
+    private async void OnCheckboxChanged(object sender, CheckedChangedEventArgs e)
+    {
+        if (sender is not CheckBox checkbox || checkbox.BindingContext is not ToDoItem item)
+            return;
+
+        item.IsDone = e.Value;
+
+        try
+        {
+            await _firebaseService.UpdateToDoAsync(item); // Firebase'e güncelle
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Hata", "Görev güncellenemedi: " + ex.Message, "Tamam");
+        }
+    }
 
     private async void OnAddButtonClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(ToDoDetailPage));
+        try
+        {
+            await Shell.Current.GoToAsync(nameof(ToDoDetailPage));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Hata", "Sayfa açılamadı: " + ex.Message, "Tamam");
+        }
     }
 }
