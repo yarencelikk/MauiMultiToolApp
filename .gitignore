@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Gizli yapılandırma (Firebase adresi vb.)
+Secrets.cs
