@@ -1,0 +1,10 @@
+// Bu dosyayı aynı klasörde "ApiKeys.cs" adıyla kopyalayın ve kendi anahtarınızı girin.
+// ApiKeys.cs .gitignore'a eklidir, GitHub'a gönderilmez.
+
+namespace GorselProgramlama_Yeni;
+
+public static class ApiKeys
+{
+    // Firebase Console > Proje ayarları > Genel > Web API anahtarı
+    public const string FirebaseApiKey = "FIREBASE_WEB_API_ANAHTARINIZ";
+}
