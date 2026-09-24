@@ -13,10 +13,10 @@ namespace GorselProgramlama_Yeni.Services
 
         public FirebaseService()
         {
-            _firebaseClient = new FirebaseClient("https://gorselprogramlama-d9e4e-default-rtdb.europe-west1.firebasedatabase.app/");
+            _firebaseClient = new FirebaseClient(Secrets.FirebaseUrl);
         }
 
-        // Tüm görevleri getir (kullanýcýya özel filtreleme yok)
+        // TÃ¼m gÃ¶revleri getir (kullanÃ½cÃ½ya Ã¶zel filtreleme yok)
         public async Task<List<ToDoItem>> GetToDoItemsAsync()
         {
             return (await _firebaseClient
@@ -30,7 +30,7 @@ namespace GorselProgramlama_Yeni.Services
                 }).ToList();
         }
 
-        // Görev ekle
+        // GÃ¶rev ekle
         public async Task<string> AddToDoAsync(ToDoItem item)
         {
             var result = await _firebaseClient
@@ -39,7 +39,7 @@ namespace GorselProgramlama_Yeni.Services
             return result.Key;
         }
 
-        // Görev sil
+        // GÃ¶rev sil
         public async Task DeleteToDoAsync(string id)
         {
             await _firebaseClient
@@ -48,7 +48,7 @@ namespace GorselProgramlama_Yeni.Services
                 .DeleteAsync();
         }
 
-        // Görev güncelle
+        // GÃ¶rev gÃ¼ncelle
         public async Task UpdateToDoAsync(ToDoItem item)
         {
             await _firebaseClient
