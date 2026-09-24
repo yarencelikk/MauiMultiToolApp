@@ -6,7 +6,7 @@ namespace GorselProgramlama_Yeni.Pages
 {
     public partial class LoginPage : ContentPage
     {
-        private const string ApiKey = "AIzaSyBKXv1zhSzl0YAEequZV9rvfGnVHEmk9OA";
+        private const string ApiKey = ApiKeys.FirebaseApiKey;
 
         public LoginPage()
         {
@@ -20,7 +20,7 @@ namespace GorselProgramlama_Yeni.Pages
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                ErrorLabel.Text = "Lütfen e-posta ve þifre alanlarýný doldurun.";
+                ErrorLabel.Text = "LÃ¼tfen e-posta ve ÅŸifre alanlarÄ±nÄ± doldurun.";
                 ErrorLabel.IsVisible = true;
                 return;
             }
@@ -41,20 +41,20 @@ namespace GorselProgramlama_Yeni.Pages
 
             if (response.IsSuccessStatusCode)
             {
-                await DisplayAlert("Giriþ Baþarýlý", "Hoþ geldiniz!", "Tamam");
+                await DisplayAlert("GiriÅŸ BaÅŸarÄ±lÄ±", "HoÅŸ geldiniz!", "Tamam");
                 ErrorLabel.IsVisible = false;
                 await Shell.Current.GoToAsync("MainPage");
             }
             else
             {
                 if (result.Contains("EMAIL_NOT_FOUND"))
-                    ErrorLabel.Text = "Bu e-posta adresine ait bir hesap bulunamadý.";
+                    ErrorLabel.Text = "Bu e-posta adresine ait bir hesap bulunamadÄ±.";
                 else if (result.Contains("INVALID_PASSWORD"))
-                    ErrorLabel.Text = "Þifre yanlýþ. Lütfen tekrar deneyin.";
+                    ErrorLabel.Text = "Åžifre yanlÄ±ÅŸ. LÃ¼tfen tekrar deneyin.";
                 else if (result.Contains("INVALID_LOGIN_CREDENTIALS"))
-                    ErrorLabel.Text = "Geçersiz giriþ bilgileri. E-posta veya þifre hatalý olabilir.";
+                    ErrorLabel.Text = "GeÃ§ersiz giriÅŸ bilgileri. E-posta veya ÅŸifre hatalÄ± olabilir.";
                 else
-                    ErrorLabel.Text = "Giriþ yapýlamadý. Lütfen bilgilerinizi kontrol edin.";
+                    ErrorLabel.Text = "GiriÅŸ yapÄ±lamadÄ±. LÃ¼tfen bilgilerinizi kontrol edin.";
 
                 ErrorLabel.IsVisible = true;
             }
@@ -70,7 +70,7 @@ namespace GorselProgramlama_Yeni.Pages
 
             if (string.IsNullOrEmpty(fullName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                ErrorLabel.Text = "Lütfen tüm alanlarý doldurun.";
+                ErrorLabel.Text = "LÃ¼tfen tÃ¼m alanlarÄ± doldurun.";
                 ErrorLabel.IsVisible = true;
                 return;
             }
@@ -91,7 +91,7 @@ namespace GorselProgramlama_Yeni.Pages
 
             if (response.IsSuccessStatusCode)
             {
-                await DisplayAlert("Baþarýlý", $"Kayýt tamamlandý, Hoþ geldin {fullName}", "Tamam");
+                await DisplayAlert("BaÅŸarÄ±lÄ±", $"KayÄ±t tamamlandÄ±, HoÅŸ geldin {fullName}", "Tamam");
                 RegisterSection.IsVisible = false;
                 LoginSection.IsVisible = true;
                 ErrorLabel.IsVisible = false;
@@ -99,11 +99,11 @@ namespace GorselProgramlama_Yeni.Pages
             else
             {
                 if (result.Contains("WEAK_PASSWORD"))
-                    ErrorLabel.Text = "Þifreniz en az 6 karakter olmalýdýr.";
+                    ErrorLabel.Text = "Åžifreniz en az 6 karakter olmalÄ±dÄ±r.";
                 else if (result.Contains("EMAIL_EXISTS"))
-                    ErrorLabel.Text = "Bu e-posta zaten kayýtlý.";
+                    ErrorLabel.Text = "Bu e-posta zaten kayÄ±tlÄ±.";
                 else
-                    ErrorLabel.Text = "Kayýt baþarýsýz. Lütfen tekrar deneyin.";
+                    ErrorLabel.Text = "KayÄ±t baÅŸarÄ±sÄ±z. LÃ¼tfen tekrar deneyin.";
 
                 ErrorLabel.IsVisible = true;
             }
@@ -115,7 +115,7 @@ namespace GorselProgramlama_Yeni.Pages
         {
             LoginSection.IsVisible = false;
             RegisterSection.IsVisible = true;
-            // Hatalarý temizle
+            // HatalarÄ± temizle
             ErrorLabel.IsVisible = false;
             ErrorLabel.Text = string.Empty;
         }
@@ -124,7 +124,7 @@ namespace GorselProgramlama_Yeni.Pages
         {
             RegisterSection.IsVisible = false;
             LoginSection.IsVisible = true;
-            // Hatalarý temizle
+            // HatalarÄ± temizle
             ErrorLabel.IsVisible = false;
             ErrorLabel.Text = string.Empty;
         }
